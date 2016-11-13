@@ -17,9 +17,10 @@ port = sys.argv[1]
 def get_my_IP():
     return socket.gethostbyname(socket.gethostname())
 
-def handle_helo():
+def handle_helo(client, address):
     reply_msg = "HELO txt\nIP:"+ get_my_IP() +"\nPort:"+str(port)+"\nStudentID:13325878\n"
-    print(reply_msg)
+    #print(reply_msg)
+    client.send(reply_msg.encode("utf-8"))
     return reply_msg
 
 def handle_other():
@@ -39,7 +40,7 @@ def handle(client, address):
     data = client.recv(pack_size)
     decoded_data = data.decode("utf-8")
     if decoded_data  == "HELO text\n" :
-        handle_helo()
+        handle_helo(client, address)
     elif decoded_data == "KILL_SERVICE\n":
         handle_kill()
     else:
