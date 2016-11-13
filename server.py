@@ -3,6 +3,7 @@ A simple echo server
 """ 
 
 import socket 
+import sys
 import os
 import threading
 import random
@@ -11,7 +12,7 @@ import queue
 
 num_threads = 8
 host = ''
-port = 3001
+port = sys.argv[1] 
 
 def get_my_IP():
     return socket.gethostbyname(socket.gethostname())
@@ -42,14 +43,14 @@ def handle(client, address):
     elif decoded_data == "KILL_SERVICE\n":
         handle_kill()
     else:
-        pass
+       handle_other() 
 
 
 def main():
     backlog = 5
     size = 1024
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind((host, port))
+    s.bind((host, int(port)))
     s.listen(backlog)
     q = queue.Queue(maxsize=8)
     for i in range(num_threads):
