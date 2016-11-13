@@ -1,4 +1,15 @@
 ##This is a simple Python 3 multi-threadedserver implementation.
+You must have python 3 installed and on your path. To do this you can use
+```bash
+chmod u+x compile.sh
+./compile.sh
+```
+WARNING, THIS WILL TAKE A WHILE.
+
+When you want to run the server use
+```bash
+start.sh <portnumber>
+```
 
 You can connect to the server via port 3000 and send it commands using
 the given cli.py client code that is also included
